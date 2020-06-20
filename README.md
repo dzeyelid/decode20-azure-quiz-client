@@ -1,29 +1,91 @@
-# Vue Basic
+# de:code 2020 Azure Quiz client
 
-## Project setup
+### Show the question and choices
 
-```bash
-npm install
+```json
+{
+  "state": "show",
+  "question": {
+    "id": number,
+    "description": string
+  },
+  "choices": {
+    "a": {
+      "description": string
+    },
+    "b": {
+      "description": string
+    },
+    "c": {
+      "description": string
+    },
+    "d": {
+      "description": string
+    }
+  }
+}
 ```
 
-### Compiles and hot-reloads for development
+### Start answering
 
-```bash
-npm run serve
+```json
+{
+  "state": "start",
+  "question": {
+    "id": number,
+    "description": string
+  },
+  "choices": {
+    "a": {
+      "description": string
+    },
+    "b": {
+      "description": string
+    },
+    "c": {
+      "description": string
+    },
+    "d": {
+      "description": string
+    }
+  }
+}
 ```
 
-### Compiles and minifies for production
+### Finish answering
 
-```bash
-npm run build
+```json
+{
+  "state": "finish",
+  "choices": {
+    "id": number,
+    "description": string
+  },
+  "options": {
+    "a": {
+      "description": string
+    },
+    "b": {
+      "description": string
+    },
+    "c": {
+      "description": string
+    },
+    "d": {
+      "description": string
+    }
+  },
+  "corect": {
+    "choise": string,
+    "description": string
+  }
+}
 ```
 
-### Lints and fixes files
+### Show the result
 
-```bash
-npm run lint
+```json
+{
+  "state": "reuslt"
+}
 ```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).

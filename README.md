@@ -1,5 +1,13 @@
 # de:code 2020 Azure Quiz client
 
+## 回答API
+
+LogicApps による回答収集APIについては、下記に定義します。
+
+- [openapi.yaml](./docs/openapi.yaml)
+
+## SignalR によるメッセージ
+
 ### Show the question and choices
 
 ```json

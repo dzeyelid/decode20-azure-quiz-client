@@ -1,0 +1,34 @@
+openapi: 3.0.0
+info:
+  title: de:code 2020 Azure Quiz
+  description: de:code 2020 Azure Quiz
+  version: 1.0.0
+
+servers:
+  - url: https://{logicAppsUrl}
+    description: LogicApps の URL
+    variables:
+      logicAppsUrl:
+        default: <Input here>
+        description: LogicApps の URL
+
+paths:
+  /:
+    post:
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identifier:
+                    type: string
+                    format: uuid
+                  question_id:
+                    type: integer
+                    minimum: 1
+                  answer_id:
+                    type: string
+                    pattern: 'a|b|c|d'

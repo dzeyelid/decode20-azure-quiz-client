@@ -65,11 +65,11 @@ LogicApps による回答収集APIについては、下記に定義します。
 ```json
 {
   "state": "finish",
-  "choices": {
+  "question": {
     "id": number,
     "description": string
   },
-  "options": {
+  "choices": {
     "a": {
       "description": string
     },
@@ -83,7 +83,7 @@ LogicApps による回答収集APIについては、下記に定義します。
       "description": string
     }
   },
-  "corect": {
+  "correct": {
     "choise": string,
     "description": string
   }
@@ -94,6 +94,6 @@ LogicApps による回答収集APIについては、下記に定義します。
 
 ```json
 {
-  "state": "reuslt"
+  "state": "result"
 }
 ```

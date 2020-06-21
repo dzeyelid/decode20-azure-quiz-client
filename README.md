@@ -28,6 +28,7 @@ http://localhost:8080 へアクセス
 
 ```ps1
 cd api
+npm install
 npm run start
 ```
 

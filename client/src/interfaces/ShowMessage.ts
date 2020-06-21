@@ -1,23 +1,9 @@
 import { Message } from './Message';
+import { Question } from './Question';
+import { Choices } from './Choices';
 
 export interface ShowMessage extends Message {
   state: 'show'
-  question?: {
-    id: string,
-    description: string,
-  }
-  choices?: {
-    a: {
-      description: string,
-    },
-    b: {
-      description: string,
-    },
-    c: {
-      description: string,
-    },
-    d: {
-      description: string,
-    },
-  }
+  question: Question
+  choices: Choices
 }

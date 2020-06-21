@@ -16,9 +16,13 @@ http://localhost:8080 へアクセス
 
 ### APIの起動
 
-Visual Studio Code を利用している場合は F5 で実行してください。
+1. `local.settings.example.json` を `local.settings.json` というファイル名で複製します。
 
-もしくは、下記の用のコマンドラインから Azure Functions をローカルで起動します。
+2. Azure Storage Emulator を起動します。
+   - 参考: [Azure ストレージ エミュレーターを使用した開発とテスト | Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/storage/common/storage-use-emulator)
+
+3. Visual Studio Code を利用している場合は F5 で実行してください。
+   - もしくは、下記の用のコマンドラインから Azure Functions をローカルで起動します。
 
 ```ps1
 cd api

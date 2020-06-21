@@ -6,7 +6,6 @@
       "direction": "in",
       "name": "req",
       "methods": [
-        "get",
         "post"
       ]
     },
@@ -14,6 +13,12 @@
       "type": "http",
       "direction": "out",
       "name": "res"
+    },
+    {
+      "type": "signalRConnectionInfo",
+      "name": "connectionInfo",
+      "hubName": "quiz",
+      "direction": "in"
     }
   ],
   "scriptFile": "../dist/negotiate/index.js"

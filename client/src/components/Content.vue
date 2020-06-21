@@ -7,6 +7,11 @@
         />
       </v-col>
     </v-row>
+    <v-row class="text-center">
+      <v-col cols="12">
+        <v-btn v-on:click="sendMessage">Send</v-btn>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -14,6 +19,7 @@
 import Vue from 'vue';
 import { uuid } from 'vue-uuid';
 import Waiting from './Waiting.vue';
+import SignalRClient from '../services/SignalRClient';
 
 export default Vue.extend({
   name: 'Content',
@@ -25,16 +31,31 @@ export default Vue.extend({
   data: () => ({
     state: 'init',
     uuid: '',
+    signalRClient: {} as SignalRClient,
   }),
 
-  created() {
+  async created() {
     this.uuid = this.getUuid();
+    this.signalRClient = await this.getClient();
   },
 
   methods: {
     getUuid(): string {
       return uuid.v4();
     },
+    async getClient(): Promise<SignalRClient> {
+      const client = new SignalRClient();
+      client.setHandler('RecieveMessage', this.receiveMessage);
+      await client.start();
+      return client;
+    },
+    receiveMessage(user: string, message: string): void {
+      console.log(message);
+    },
+    async sendMessage() {
+      await this.signalRClient.send('messages', 'user', 'Hooray!');
+    },
   },
 });
+
 </script>

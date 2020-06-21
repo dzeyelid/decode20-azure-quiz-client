@@ -16,9 +16,9 @@ export default class SignalRClient {
   setHandler(methodName: string, handler: (...args: any[]) => void): void {
     // this.connection.on(methodName, handler);
     console.log('setHandler');
-    this.connection.on('methodName', (user: string, message: string) => {
+    this.connection.on('newMessage', (username: string, message: string) => {
       console.log('aaaaaaaaaaaa');
-      console.log(user);
+      console.log(username);
       console.log(message);
     });
   }

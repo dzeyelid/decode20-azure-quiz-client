@@ -12,6 +12,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { uuid } from 'vue-uuid';
 import Waiting from './Waiting.vue';
 
 export default Vue.extend({
@@ -32,7 +33,7 @@ export default Vue.extend({
 
   methods: {
     getUuid(): string {
-      return '';
+      return uuid.v4();
     },
   },
 });

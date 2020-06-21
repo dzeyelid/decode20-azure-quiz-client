@@ -2,7 +2,7 @@
 POST http://localhost:8080/api/messages
 
 {
-  "state": "init",
+  "state": "init"
 }
 
 ### 

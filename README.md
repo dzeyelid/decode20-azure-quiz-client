@@ -43,7 +43,7 @@ LogicApps による回答収集APIについては、下記に定義します。
 
 ### Visual Studio Code の REST Client を利用したサンプルメッセージ送信
 
-REST Client 拡張機能で利用できるサンプルを用意しました。ローカル環境での確認にご利用ください。
+[REST Client 拡張機能](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)で利用できるサンプルを用意しました。ローカル環境での確認にご利用ください。
 
 - [sample.http](./docs/sample.http)
 

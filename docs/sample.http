@@ -1,0 +1,96 @@
+
+POST http://localhost:8080/api/messages
+
+{
+  "state": "init",
+}
+
+### 
+
+POST http://localhost:8080/api/messages
+
+{
+  "state": "show",
+  "question": {
+    "id": "1",
+    "description": "（サンプル）北海道弁ではない言葉はどれでしょう？"
+  },
+  "choices": {
+    "a": {
+      "description": "なまら"
+    },
+    "b": {
+      "description": "したっけ"
+    },
+    "c": {
+      "description": "おおきに"
+    },
+    "d": {
+      "description": "ぼっこ"
+    }
+  }
+}
+
+### 
+
+POST http://localhost:8080/api/messages
+
+{
+  "state": "start",
+  "question": {
+    "id": "1",
+    "description": "（サンプル）北海道弁ではない言葉はどれでしょう？"
+  },
+  "choices": {
+    "a": {
+      "description": "なまら"
+    },
+    "b": {
+      "description": "したっけ"
+    },
+    "c": {
+      "description": "おおきに"
+    },
+    "d": {
+      "description": "ぼっこ"
+    }
+  }
+}
+
+### 
+
+POST http://localhost:8080/api/messages
+
+{
+  "state": "finish",
+  "question": {
+    "id": "1",
+    "description": "（サンプル）北海道弁ではない言葉はどれでしょう？"
+  },
+  "choices": {
+    "a": {
+      "description": "なまら"
+    },
+    "b": {
+      "description": "したっけ"
+    },
+    "c": {
+      "description": "おおきに"
+    },
+    "d": {
+      "description": "ぼっこ"
+    },
+    "correct": {
+      "choise": "c",
+      "description": "答えは c の「おおきに」です。a, b, c はそれぞれ、なまら = すごい, したっけ = それでは, ぼっこ = 棒 という意味です。"
+    }
+  }
+}
+
+### 
+
+POST http://localhost:8080/api/messages
+
+{
+  "state": "result"
+}

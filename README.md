@@ -16,7 +16,7 @@ http://localhost:8080 へアクセス
 
 ### APIの起動
 
-1. `localsettings.json` の準備
+1. `local.settings.json` の準備
    1. `local.settings.example.json` を `local.settings.json` というファイル名で複製します。
    1. `AzureSignalRConnectionString` に SignalR service の接続文字列を設定して下さい。
 
@@ -38,9 +38,18 @@ LogicApps による回答収集APIについては、下記に定義します。
 
 - [openapi.yaml](./docs/openapi.yaml)
 
-## SignalR によるメッセージ
 
-### Show the question and choices
+## SignalR でやりとりするメッセージ
+
+### Visual Studio Code の REST Client を利用したサンプルメッセージ送信
+
+REST Client 拡張機能で利用できるサンプルを用意しました。ローカル環境での確認にご利用ください。
+
+- [sample.http](./docs/sample.http)
+
+### メッセージ案
+
+#### Show the question and choices
 
 ```json
 {
@@ -66,7 +75,7 @@ LogicApps による回答収集APIについては、下記に定義します。
 }
 ```
 
-### Start answering
+#### Start answering
 
 ```json
 {
@@ -92,7 +101,7 @@ LogicApps による回答収集APIについては、下記に定義します。
 }
 ```
 
-### Finish answering
+#### Finish answering
 
 ```json
 {
@@ -122,10 +131,18 @@ LogicApps による回答収集APIについては、下記に定義します。
 }
 ```
 
-### Show the result
+#### Show the result
 
 ```json
 {
   "state": "result"
+}
+```
+
+#### Initialize
+
+```json
+{
+  "state": "init"
 }
 ```

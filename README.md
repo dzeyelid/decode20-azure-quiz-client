@@ -1,5 +1,30 @@
 # de:code 2020 Azure Quiz client
 
+## ローカルでの確認方法
+
+### フロントエンドの起動
+
+Vue の開発サーバを起動します。
+
+```ps1
+cd client
+npm install
+npm run serve
+```
+
+http://localhost:8080 へアクセス
+
+### APIの起動
+
+Visual Studio Code を利用している場合は F5 で実行してください。
+
+もしくは、下記の用のコマンドラインから Azure Functions をローカルで起動します。
+
+```ps1
+cd api
+npm run start
+```
+
 ## 回答API
 
 LogicApps による回答収集APIについては、下記に定義します。
@@ -84,7 +109,7 @@ LogicApps による回答収集APIについては、下記に定義します。
     }
   },
   "correct": {
-    "choise": string,
+    "choice": string,
     "description": string
   }
 }

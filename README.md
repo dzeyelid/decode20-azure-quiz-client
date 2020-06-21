@@ -16,7 +16,9 @@ http://localhost:8080 へアクセス
 
 ### APIの起動
 
-1. `local.settings.example.json` を `local.settings.json` というファイル名で複製します。
+1. `localsettings.json` の準備
+   1. `local.settings.example.json` を `local.settings.json` というファイル名で複製します。
+   1. `AzureSignalRConnectionString` に SignalR service の接続文字列を設定して下さい。
 
 2. Azure Storage Emulator を起動します。
    - 参考: [Azure ストレージ エミュレーターを使用した開発とテスト | Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/storage/common/storage-use-emulator)

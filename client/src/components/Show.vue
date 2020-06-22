@@ -17,7 +17,7 @@
               :key=id
             >
               <v-list-item-icon>
-                <v-radio :value="id" disabled=true></v-radio>
+                <v-radio :value="id" disabled="disabled"></v-radio>
               </v-list-item-icon>
               <v-list-item-content>
                 {{ id }}. {{ choice.description }}

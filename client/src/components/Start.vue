@@ -27,8 +27,7 @@
             </v-list-item>
           </v-radio-group>
           <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" @click="sendAnswer">
+            <v-btn color="primary" @click="sendAnswer" v-bind:disabled="this.buttonIsDisabled">
               送信
               <v-icon small class="ml-2">fas fa-paper-plane</v-icon>
             </v-btn>
@@ -42,7 +41,10 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue';
+import axios from 'axios';
 import { StartMessage } from '../interfaces/StartMessage';
+import Answer from '../classes/Answer';
+import { AnswerId } from '../interfaces/AnswerMessage';
 
 export default Vue.extend({
   name: 'Start',
@@ -51,13 +53,40 @@ export default Vue.extend({
     message: {} as PropType<StartMessage>,
   },
   data: () => ({
-    answer: '',
+    answer: null as AnswerId | null,
+    sent: false,
   }),
-  methods: {
-    sendAnswer(event: Event) {
-      if (this.answer !== '') {
-        console.log(this.answer);
+  watch: {
+    message() {
+      this.initializeAnswer();
+      this.sent = false;
+    },
+  },
+  computed: {
+    buttonIsDisabled(): 'disabled' | false {
+      if (this.answer === null || this.sent) {
+        return 'disabled';
       }
+      return false;
+    },
+  },
+  methods: {
+    async sendAnswer() {
+      if (this.answer !== null) {
+        const answer = Answer.createMessage(this.uuid, this.message.question.id, this.answer);
+        const url = process.env.VUE_APP_SEND_ANSWER_URL;
+        if (typeof url === 'string') {
+          await axios.post(url, answer);
+          this.initializeAnswer();
+          this.sent = true;
+        } else {
+          console.log('VUE_APP_SEND_ANSWER_URL is not set.');
+        }
+      }
+    },
+
+    initializeAnswer() {
+      this.answer = null;
     },
   },
 });

@@ -54,7 +54,7 @@ export default Vue.extend({
     answer: '',
   }),
   methods: {
-    sendAnswer(event) {
+    sendAnswer(event: Event) {
       if (this.answer !== '') {
         console.log(this.answer);
       }

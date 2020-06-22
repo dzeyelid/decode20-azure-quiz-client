@@ -32,106 +32,119 @@ npm install
 npm run start
 ```
 
-## 回答API
+## 関連API
+
+### 回答API
 
 LogicApps による回答収集APIについては、下記に定義します。
 
-- [openapi.yaml](./docs/openapi.yaml)
+- [openapi_to-logicapp.yaml](./docs/openapi_to-logicapp.yaml)
 
+### 回答クライアント操作API
 
-## SignalR でやりとりするメッセージ
+本回答クライアントに対しての操作に関する OpenAPI 定義はこちらです。
 
-### Visual Studio Code の REST Client を利用したサンプルメッセージ送信
+- [openapi_to-web-client.yaml](./docs/openapi_to-web-client.yaml)
+
+#### Visual Studio Code の REST Client を利用したサンプルメッセージ送信
 
 [REST Client 拡張機能](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)で利用できるサンプルを用意しました。ローカル環境での確認にご利用ください。
 
 - [sample.http](./docs/sample.http)
 
-### メッセージ案
+#### 回答クライアントに送信するメッセージ
 
-#### Show the question and choices
+##### Show the question and choices
+
+質問と選択肢を表示します。
 
 ```json
 {
   "state": "show",
   "question": {
-    "id": number,
-    "description": string
+    "id": "1",
+    "description": "質問の内容"
   },
   "choices": {
     "a": {
-      "description": string
+      "description": "選択肢 a の説明"
     },
     "b": {
-      "description": string
+      "description": "選択肢 a の説明"
     },
     "c": {
-      "description": string
+      "description": "選択肢 a の説明"
     },
     "d": {
-      "description": string
+      "description": "選択肢 a の説明"
     }
   }
 }
 ```
 
-#### Start answering
+##### Start answering
+
+回答画面を表示し、回答を送信するできる状態にします。
 
 ```json
 {
   "state": "start",
   "question": {
-    "id": number,
-    "description": string
+    "id": "1",
+    "description": "質問の内容"
   },
   "choices": {
     "a": {
-      "description": string
+      "description": "選択肢 a の説明"
     },
     "b": {
-      "description": string
+      "description": "選択肢 a の説明"
     },
     "c": {
-      "description": string
+      "description": "選択肢 a の説明"
     },
     "d": {
-      "description": string
+      "description": "選択肢 a の説明"
     }
   }
 }
 ```
 
-#### Finish answering
+##### Finish answering
+
+回答画面を終了させます。
 
 ```json
 {
   "state": "finish",
   "question": {
-    "id": number,
-    "description": string
+    "id": "1",
+    "description": "質問の内容"
   },
   "choices": {
     "a": {
-      "description": string
+      "description": "選択肢 a の説明"
     },
     "b": {
-      "description": string
+      "description": "選択肢 a の説明"
     },
     "c": {
-      "description": string
+      "description": "選択肢 a の説明"
     },
     "d": {
-      "description": string
+      "description": "選択肢 a の説明"
     }
   },
   "correct": {
-    "choice": string,
-    "description": string
+    "choice": "a",  # 答えID (a or b or c or d)
+    "description": "答えの解説"
   }
 }
 ```
 
-#### Show the result
+##### Show the result
+
+全体の結果を表示します。
 
 ```json
 {
@@ -139,7 +152,9 @@ LogicApps による回答収集APIについては、下記に定義します。
 }
 ```
 
-#### Initialize
+##### Initialize
+
+初期化します。
 
 ```json
 {

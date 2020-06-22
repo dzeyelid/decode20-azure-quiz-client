@@ -1,0 +1,138 @@
+openapi: 3.0.0
+info:
+  title: de:code 2020 Tech Quiz - Control client
+  description: APIs to control web client that makes audience answer for de:code 2020 Tech Quiz
+  version: 1.0.0
+
+servers:
+  - url: 'http://localhost:{port}/api'
+    description: Local
+    variables:
+      port:
+        default: '8080'
+        description: port number
+  - url: 'https://{prefix}.{location}.azurestaticapps.net/api'
+    description: Static Web App
+    variables:
+      prefix:
+        default: <Input here>
+        description: Sub domain prefix
+      location:
+        default: eastasia
+        description: Location
+
+paths:
+  /messages:
+    post:
+      operationId: sendMessages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendMessagesRequestBody"
+      responses:
+        '200':
+          description: Succeeded
+
+components:
+  schemas:
+    SendMessagesRequestBody:
+      oneOf:
+      - $ref: '#/components/schemas/InitMessageRequestBody'
+      - $ref: '#/components/schemas/ShowMessageRequestBody'
+      - $ref: '#/components/schemas/StartMessageRequestBody'
+      - $ref: '#/components/schemas/FinishMessageRequestBody'
+      - $ref: '#/components/schemas/ResultMessageRequestBody'
+    InitMessageRequestBody:
+      type: object
+      required: [state]
+      properties:
+        state:
+          type: string
+          format: init
+          example: init
+          default: init
+    ShowMessageRequestBody:
+      type: object
+      required: [state,question,choices]
+      properties:
+        state:
+          type: string
+          format: show
+          example: show
+          default: show
+        question:
+          $ref: "#/components/schemas/Question"
+        choices:
+          $ref: "#/components/schemas/Choices"
+    StartMessageRequestBody:
+      type: object
+      required: [state,question,choices]
+      properties:
+        state:
+          type: string
+          format: start
+          example: start
+          default: start
+        question:
+          $ref: "#/components/schemas/Question"
+        choices:
+          $ref: "#/components/schemas/Choices"
+    FinishMessageRequestBody:
+      type: object
+      required: [state,question,choices,correct]
+      properties:
+        state:
+          type: string
+          format: finish
+          example: finish
+          default: finish
+        question:
+          $ref: "#/components/schemas/Question"
+        choices:
+          $ref: "#/components/schemas/Choices"
+        correct:
+          $ref: "#/components/schemas/CorrectAnswer"
+    ResultMessageRequestBody:
+      type: object
+      required: [state]
+      properties:
+        state:
+          type: string
+          format: result
+          example: result
+          default: result
+    Question:
+      type: object
+      required: [id,description]
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+    Choices:
+      type: object
+      required: [a, b, c, d]
+      properties:
+        a:
+          $ref: "#/components/schemas/Choice"
+        b:
+          $ref: "#/components/schemas/Choice"
+        c:
+          $ref: "#/components/schemas/Choice"
+        d:
+          $ref: "#/components/schemas/Choice"
+    Choice:
+      type: object
+      required: [description]
+      properties:
+        description:
+          type: string
+    CorrectAnswer:
+      type: object
+      properties:
+        choice:
+          type: string
+          format: a|b|c|d
+        description:
+          type: string

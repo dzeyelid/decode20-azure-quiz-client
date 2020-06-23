@@ -23,7 +23,7 @@
                 v-bind:class=
                   "[choice.isCorrect ? 'font-weight-bold' : disabledChoice]"
               >
-                  {{ id }}. {{ choice.description }}
+                  {{ id | uppercase }}. {{ choice.description }}
               </v-list-item-content>
             </v-list-item>
           </v-radio-group>
@@ -62,7 +62,7 @@ export default Vue.extend({
         const key = entry[0];
         const choice: Choice = {
           description: entry[1].description,
-          isCorrect: key === correct.choice,
+          isCorrect: key.toLowerCase() === correct.choice.toLowerCase(),
         };
         Object.assign(reassignedChoices, { [key]: choice });
         return true;

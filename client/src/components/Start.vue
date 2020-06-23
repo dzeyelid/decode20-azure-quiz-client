@@ -22,7 +22,7 @@
                 <v-radio :value="id"></v-radio>
               </v-list-item-icon>
               <v-list-item-content>
-                {{ id }}. {{ choice.description }}
+                {{ id | uppercase }}. {{ choice.description }}
               </v-list-item-content>
             </v-list-item>
           </v-radio-group>

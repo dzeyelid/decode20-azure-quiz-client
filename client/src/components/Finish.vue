@@ -67,7 +67,6 @@ export default Vue.extend({
         Object.assign(reassignedChoices, { [key]: choice });
         return true;
       });
-      console.log(reassignedChoices);
       return reassignedChoices;
     },
   },

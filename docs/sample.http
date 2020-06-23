@@ -79,11 +79,11 @@ POST http://localhost:8080/api/messages
     },
     "d": {
       "description": "ぼっこ"
-    },
-    "correct": {
-      "choice": "c",
-      "description": "答えは c の「おおきに」です。a, b, c はそれぞれ、なまら = すごい, したっけ = それでは, ぼっこ = 棒 という意味です。"
     }
+  },
+  "correct": {
+    "choice": "c",
+    "description": "答えは c の「おおきに」です。a, b, c はそれぞれ、なまら = すごい, したっけ = それでは, ぼっこ = 棒 という意味です。"
   }
 }
 

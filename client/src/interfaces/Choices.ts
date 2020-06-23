@@ -1,14 +1,9 @@
+import { Choice } from './Choice';
+
 export interface Choices {
-  a: {
-    description: string,
-  },
-  b: {
-    description: string,
-  },
-  c: {
-    description: string,
-  },
-  d: {
-    description: string,
-  },
+  hasOwnProoerty<T>(this: T, v: any): v is keyof T,
+  a: Choice,
+  b: Choice,
+  c: Choice,
+  d: Choice,
 }

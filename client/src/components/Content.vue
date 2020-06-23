@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { uuid } from 'vue-uuid';
+import { uuid as uuidLib } from 'vue-uuid';
 import Waiting from './Waiting.vue';
 import Show from './Show.vue';
 import Start from './Start.vue';
@@ -76,7 +76,12 @@ export default Vue.extend({
 
   methods: {
     getUuid(): string {
-      return uuid.v4();
+      if (localStorage.uuid) {
+        return localStorage.uuid;
+      }
+      const uuid = uuidLib.v4();
+      localStorage.uuid = uuid;
+      return uuid;
     },
 
     async getClient(): Promise<SignalRClient> {

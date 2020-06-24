@@ -18,7 +18,7 @@ export default class SignalRClient {
   }
 
   start(): Promise<void> {
-    return this.connection.start().catch((err) => { console.error(err.toStoring()); });
+    return this.connection.start().catch((err: any) => { console.error(err.toString()); });
   }
 
   send = (message: Message) => {

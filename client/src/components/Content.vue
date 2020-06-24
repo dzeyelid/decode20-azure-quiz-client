@@ -5,6 +5,7 @@
         <Waiting
           v-if="this.state.isInit()"
           v-bind:uuid=uuid
+          v-on:reset-results=resetResults
         />
         <Show
           v-if="this.state.isShow()"
@@ -25,6 +26,7 @@
         <ResultComponent
           v-if="this.state.isResult()"
           v-bind:uuid=uuid
+          v-bind:results=results
         />
       </v-col>
     </v-row>
@@ -154,6 +156,11 @@ export default Vue.extend({
         this.results[index] = result;
       }
 
+      this.updateResultsInStorage();
+    },
+
+    resetResults() {
+      this.results = [];
       this.updateResultsInStorage();
     },
   },

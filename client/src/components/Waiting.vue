@@ -31,6 +31,11 @@
         あなたの ID は <code>{{ uuid }}</code>
       </v-col>
     </v-row>
+    <v-row class="text-center">
+      <v-col>
+        <v-btn @click="$emit('reset-results')">Rest results</v-btn>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

@@ -40,15 +40,14 @@ export default Vue.extend({
     uuid: String,
     results: [] as PropType<Result[]>,
   },
-
   computed: {
-    percentage() {
+    percentage(): number {
       const resultObjects = this.results;
       const correctResults = resultObjects.filter((result) => (result as Result).isCorrect);
       const rate = correctResults.length / resultObjects.length;
       return Math.round(rate * 100);
     },
-    message() {
+    message(): string {
       if (this.percentage === 100) {
         return 'PERFECT!!';
       }

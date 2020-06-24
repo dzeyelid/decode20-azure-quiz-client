@@ -1,7 +1,5 @@
-import { Question } from './Question';
-
 export interface ResultInterface {
-  question: Question
+  questionId: string
   answerId: string
   isCorrect: boolean | null
 }

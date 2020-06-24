@@ -46,6 +46,7 @@ import { ShowMessage } from '../interfaces/ShowMessage';
 import { StartMessage } from '../interfaces/StartMessage';
 import { FinishMessage } from '../interfaces/FinishMessage';
 import { ResultMessage } from '../interfaces/ResultMessage';
+import { ResultInterface } from '../interfaces/ResultInterface';
 import State from '../classes/State';
 import Result from '../classes/Result';
 
@@ -106,10 +107,38 @@ export default Vue.extend({
     receiveMessage(message: Message): void {
       this.message = message;
       this.state.setState(message.state);
+
+      if (this.state.isFinish()) {
+        this.updateResultWithFinishMessage(this.message as FinishMessage);
+      }
     },
 
     async sendMessage() {
       await this.signalRClient.send({ state: 'init' });
+    },
+
+    updateResultWithFinishMessage(message: FinishMessage) {
+      const index = this.findFromResults(message.question.id);
+      if (index >= 0) {
+        const result = this.createResultFromObjectWithChoicedAnswerId(
+          this.results[index],
+          message.correct.choice,
+        );
+        this.updateResult(result);
+      }
+    },
+
+    createResultFromObjectWithChoicedAnswerId(
+      resultObject: ResultInterface,
+      choicedAnswerId: string,
+    ): Result {
+      const { questionId, answerId } = resultObject;
+      const isCorrect = answerId.toLowerCase() === choicedAnswerId.toLowerCase();
+      return new Result(questionId, answerId, isCorrect);
+    },
+
+    findFromResults(questionId: string) {
+      return this.results.findIndex((result) => result.questionId === questionId);
     },
 
     updateResult(result: Result) {
@@ -118,8 +147,7 @@ export default Vue.extend({
         return;
       }
 
-      const index = this.results.findIndex((element) => element.question.id === result.question.id);
-
+      const index = this.findFromResults(result.questionId);
       if (index < 0) {
         this.results.push(result);
       } else {

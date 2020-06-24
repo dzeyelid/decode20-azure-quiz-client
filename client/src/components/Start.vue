@@ -78,7 +78,7 @@ export default Vue.extend({
         const url = process.env.VUE_APP_SEND_ANSWER_URL;
         if (typeof url === 'string') {
           await axios.post(url, answer);
-          const result = new Result(this.message.question, this.answerId);
+          const result = new Result(this.message.question.id, this.answerId);
           this.$emit('update-result', result);
           this.initializeAnswer();
           this.sent = true;

@@ -1,19 +1,15 @@
 import { ResultInterface } from '@/interfaces/ResultInterface';
-import { Question } from '../interfaces/Question';
 
 export default class Result implements ResultInterface {
-  public question: Question;
+  public questionId: string;
 
   public answerId: string;
 
   public isCorrect: boolean | null = null;
 
-  constructor(question: Question, answerId: string) {
-    this.question = question;
+  constructor(questionId: string, answerId: string, isCorrect: boolean | null = null) {
+    this.questionId = questionId;
     this.answerId = answerId;
-  }
-
-  public setIsCorrect(isCorrect: boolean | null) {
     this.isCorrect = isCorrect;
   }
 }

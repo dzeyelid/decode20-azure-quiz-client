@@ -12,7 +12,7 @@
             {{ this.message.question.description }}
           </v-card-text>
           <v-radio-group
-            v-model="answer"
+            v-model="answerId"
           >
             <v-list-item
               v-for="(choice, id) in this.message.choices"
@@ -45,6 +45,7 @@ import axios from 'axios';
 import { StartMessage } from '../interfaces/StartMessage';
 import Answer from '../classes/Answer';
 import { AnswerId } from '../interfaces/AnswerMessage';
+import Result from '../classes/Result';
 
 export default Vue.extend({
   name: 'Start',
@@ -53,7 +54,7 @@ export default Vue.extend({
     message: {} as PropType<StartMessage>,
   },
   data: () => ({
-    answer: null as AnswerId | null,
+    answerId: null as AnswerId | null,
     sent: false,
   }),
   watch: {
@@ -64,7 +65,7 @@ export default Vue.extend({
   },
   computed: {
     buttonIsDisabled(): 'disabled' | false {
-      if (this.answer === null || this.sent) {
+      if (this.answerId === null || this.sent) {
         return 'disabled';
       }
       return false;
@@ -72,11 +73,13 @@ export default Vue.extend({
   },
   methods: {
     async sendAnswer() {
-      if (this.answer !== null) {
-        const answer = Answer.createMessage(this.uuid, this.message.question.id, this.answer);
+      if (this.answerId !== null) {
+        const answer = Answer.createMessage(this.uuid, this.message.question.id, this.answerId);
         const url = process.env.VUE_APP_SEND_ANSWER_URL;
         if (typeof url === 'string') {
           await axios.post(url, answer);
+          const result = new Result(this.message.question, this.answerId);
+          this.$emit('update-result', result);
           this.initializeAnswer();
           this.sent = true;
         } else {
@@ -86,7 +89,7 @@ export default Vue.extend({
     },
 
     initializeAnswer() {
-      this.answer = null;
+      this.answerId = null;
     },
   },
 });

@@ -15,6 +15,7 @@
           v-if="this.state.isStart()"
           v-bind:uuid=uuid
           v-bind:message=message
+          v-on:update-result="this.updateResult"
         />
         <Finish
           v-if="this.state.isFinish()"
@@ -61,7 +62,7 @@ export default Vue.extend({
 
   data: () => ({
     state: {} as State,
-    uuid: '',
+    uuid: null as string | null,
     signalRClient: {} as SignalRClient,
     message: {} as
       Message | InitMessage | ShowMessage | StartMessage | FinishMessage | ResultMessage,
@@ -69,19 +70,30 @@ export default Vue.extend({
   }),
 
   async created() {
-    this.state = new State();
     this.uuid = this.getUuid();
+    this.results = this.getResultsFromStorage();
+    this.state = new State();
     this.signalRClient = await this.getClient();
   },
 
   methods: {
     getUuid(): string {
-      if (localStorage.uuid) {
-        return localStorage.uuid;
+      if (!localStorage.uuid) {
+        const uuid = uuidLib.v4();
+        localStorage.uuid = uuid;
       }
-      const uuid = uuidLib.v4();
-      localStorage.uuid = uuid;
-      return uuid;
+      return localStorage.uuid;
+    },
+
+    getResultsFromStorage(): Result[] {
+      if (!localStorage.results) {
+        localStorage.results = JSON.stringify([] as Result[]);
+      }
+      return JSON.parse(localStorage.results);
+    },
+
+    updateResultsInStorage(): void {
+      localStorage.results = JSON.stringify(this.results);
     },
 
     async getClient(): Promise<SignalRClient> {
@@ -100,8 +112,21 @@ export default Vue.extend({
       await this.signalRClient.send({ state: 'init' });
     },
 
-    addResult(result: Result) {
-      this.results.push(result);
+    updateResult(result: Result) {
+      if (!(result instanceof Result)) {
+        console.log('The result\'s type is wrong.');
+        return;
+      }
+
+      const index = this.results.findIndex((element) => element.question.id === result.question.id);
+
+      if (index < 0) {
+        this.results.push(result);
+      } else {
+        this.results[index] = result;
+      }
+
+      this.updateResultsInStorage();
     },
   },
 });

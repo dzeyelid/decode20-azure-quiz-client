@@ -4,29 +4,29 @@
       <v-col cols="12">
         <Waiting
           v-if="this.state.isInit()"
-          v-bind:uuid=uuid
-          v-on:reset-results=resetResults
+          v-bind:uuid="uuid"
+          v-on:reset-results="resetResults"
         />
         <Show
           v-if="this.state.isShow()"
-          v-bind:uuid=uuid
-          v-bind:message=message
+          v-bind:uuid="uuid"
+          v-bind:message="message"
         />
         <Start
           v-if="this.state.isStart()"
-          v-bind:uuid=uuid
-          v-bind:message=message
+          v-bind:uuid="uuid"
+          v-bind:message="message"
           v-on:update-result="this.updateResult"
         />
         <Finish
           v-if="this.state.isFinish()"
-          v-bind:uuid=uuid
-          v-bind:message=message
+          v-bind:uuid="uuid"
+          v-bind:message="message"
         />
         <ResultComponent
           v-if="this.state.isResult()"
-          v-bind:uuid=uuid
-          v-bind:results=results
+          v-bind:uuid="uuid"
+          v-bind:results="results"
         />
       </v-col>
     </v-row>

@@ -1,3 +1,3 @@
 export interface Message {
-  state: 'init' | 'show' | 'start' | 'finish' | 'result'
+  state: 'init' | 'show' | 'start' | 'finish' | 'result';
 }

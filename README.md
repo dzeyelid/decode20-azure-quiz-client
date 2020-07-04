@@ -63,7 +63,13 @@ LogicApps による回答収集APIについては、下記に定義します。
   "state": "show",
   "question": {
     "id": "1",
-    "description": "質問の内容"
+    "description": "質問の内容",
+    "category": "カテゴリ",
+    "point": 100,
+    "position": {
+      "current": 1,  # 現在の問題位置
+      "tail": 8      # 最後尾の問題位置
+    }
   },
   "choices": {
     "a": {
@@ -91,7 +97,13 @@ LogicApps による回答収集APIについては、下記に定義します。
   "state": "start",
   "question": {
     "id": "1",
-    "description": "質問の内容"
+    "description": "質問の内容",
+    "category": "カテゴリ",
+    "point": 100,
+    "position": {
+      "current": 1,  # 現在の問題位置
+      "tail": 8      # 最後尾の問題位置
+    }
   },
   "choices": {
     "a": {
@@ -119,7 +131,13 @@ LogicApps による回答収集APIについては、下記に定義します。
   "state": "finish",
   "question": {
     "id": "1",
-    "description": "質問の内容"
+    "description": "質問の内容",
+    "category": "カテゴリ",
+    "point": 100,
+    "position": {
+      "current": 1,  # 現在の問題位置
+      "tail": 8      # 最後尾の問題位置
+    }
   },
   "choices": {
     "a": {

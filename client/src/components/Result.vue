@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-import Result from '../classes/Result';
+import { Result } from '../interfaces/Result';
 
 export default Vue.extend({
   name: 'Result',
@@ -42,9 +42,8 @@ export default Vue.extend({
   },
   computed: {
     percentage(): number {
-      const resultObjects = this.results;
-      const correctResults = resultObjects.filter((result) => (result as Result).isCorrect);
-      const rate = correctResults.length / resultObjects.length;
+      const correctResults = this.results.filter((result: Result) => result.isCorrect);
+      const rate = correctResults.length / this.results.length;
       return Math.round(rate * 100);
     },
     message(): string {

@@ -45,7 +45,7 @@ import axios from 'axios';
 import { StartMessage } from '../interfaces/StartMessage';
 import Answer from '../classes/Answer';
 import { AnswerId } from '../interfaces/AnswerMessage';
-import Result from '../classes/Result';
+import { Result } from '../interfaces/Result';
 
 export default Vue.extend({
   name: 'Start',
@@ -78,7 +78,11 @@ export default Vue.extend({
         const url = process.env.VUE_APP_SEND_ANSWER_URL;
         if (typeof url === 'string') {
           await axios.post(url, answer);
-          const result = new Result(this.message.question.id, this.answerId);
+          const result: Result = {
+            questionId: this.message.question.id,
+            answerId: this.answerId,
+            isCorrect: null,
+          };
           this.$emit('update-result', result);
           this.initializeAnswer();
           this.sent = true;

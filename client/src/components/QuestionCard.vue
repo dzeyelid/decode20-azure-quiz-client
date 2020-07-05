@@ -1,32 +1,52 @@
 <template>
   <v-card class="mx-auto" max-width="600">
     <v-card-title>
-      問題 {{ this.message.question.id }}
+      <v-container class="py-0">
+        <v-row>
+          <v-col cols="8" class="text-left">
+            問題 {{ this.message.question.id }}
+          </v-col>
+          <v-col cols="4" clas="text-right">
+            {{ this.message.question.position.current }} / {{ this.message.question.position.tail }}
+          </v-col>
+        </v-row>
+      </v-container>
     </v-card-title>
+
     <v-card-text>
-      {{ this.message.question.description }}
+      <v-container class="py-0">
+        <v-row>
+          <v-spacer></v-spacer>
+          <v-col cols="12" class="text-left">
+            {{ this.message.question.description }}
+          </v-col>
+          <v-spacer></v-spacer>
+        </v-row>
+        <v-row>
+          <v-radio-group
+            v-model="answerId"
+          >
+            <v-list-item
+              v-for="(choice, id) in this.choices"
+              :key="id"
+            >
+              <v-list-item-icon>
+                <v-radio :value="id" :disabled="choice.isDisabled ? 'disabled' : false"></v-radio>
+              </v-list-item-icon>
+              <v-list-item-content
+                v-bind:class=
+                  "[choice.isCorrect ? 'font-weight-bold' : disabledChoice]"
+              >
+                {{ id | uppercase }}. {{ choice.description }}
+              </v-list-item-content>
+            </v-list-item>
+          </v-radio-group>
+        </v-row>
+      </v-container>
     </v-card-text>
-    <v-radio-group
-      v-model="answerId"
-    >
-      <v-list-item
-        v-for="(choice, id) in this.choices"
-        :key="id"
-      >
-        <v-list-item-icon>
-          <v-radio :value="id" :disabled="choice.isDisabled ? 'disabled' : false"></v-radio>
-        </v-list-item-icon>
-        <v-list-item-content
-          v-bind:class=
-            "[choice.isCorrect ? 'font-weight-bold' : disabledChoice]"
-        >
-          {{ id | uppercase }}. {{ choice.description }}
-        </v-list-item-content>
-      </v-list-item>
-    </v-radio-group>
 
     <v-container class="pt-0" v-if="this.state.isShow()">
-      <v-row class="text-left">
+      <v-row>
         <v-col class="mx-4">
           Ready?
         </v-col>
@@ -34,12 +54,17 @@
     </v-container>
 
     <v-card-actions v-if="this.state.isStart()">
-      <v-btn color="primary" @click="sendAnswer"
-        v-bind:disabled="this.buttonIsDisabled ? 'disabled' : false">
-        送信
-        <v-icon small class="ml-2">fas fa-paper-plane</v-icon>
-      </v-btn>
-      <v-spacer></v-spacer>
+      <v-container class="py-0">
+        <v-row>
+          <v-col class="mx-4">
+            <v-btn color="primary" @click="sendAnswer"
+              v-bind:disabled="this.buttonIsDisabled ? 'disabled' : false">
+              送信
+              <v-icon small class="ml-2">fas fa-paper-plane</v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-card-actions>
 
     <v-container class="pt-0" v-if="this.state.isFinish()">

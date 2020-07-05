@@ -7,23 +7,23 @@
           v-bind:uuid="uuid"
           v-on:reset-results="resetResults"
         />
-        <Show
+        <QuestionView
           v-if="this.state.isShow()"
           v-bind:uuid="uuid"
           v-bind:message="message"
         />
-        <Start
+        <QuestionView
           v-if="this.state.isStart()"
           v-bind:uuid="uuid"
           v-bind:message="message"
           v-on:update-result="this.updateResult"
         />
-        <Finish
+        <QuestionView
           v-if="this.state.isFinish()"
           v-bind:uuid="uuid"
           v-bind:message="message"
         />
-        <ResultComponent
+        <ResultView
           v-if="this.state.isResult()"
           v-bind:uuid="uuid"
           v-bind:results="resultRepository.getAll()"
@@ -37,10 +37,8 @@
 import Vue from 'vue';
 import { uuid as uuidLib } from 'vue-uuid';
 import Waiting from './Waiting.vue';
-import Show from './Show.vue';
-import Start from './Start.vue';
-import Finish from './Finish.vue';
-import ResultComponent from './Result.vue';
+import QuestionView from './QuestionView.vue';
+import ResultView from './ResultView.vue';
 import SignalRClient from '../services/SignalRClient';
 import ResultRepository from '../services/ResultRepository';
 import { Message } from '../interfaces/Message';
@@ -57,10 +55,8 @@ export default Vue.extend({
 
   components: {
     Waiting,
-    Show,
-    Start,
-    Finish,
-    ResultComponent,
+    QuestionView,
+    ResultView,
   },
 
   data: () => ({

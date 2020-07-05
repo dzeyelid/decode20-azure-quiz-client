@@ -35,10 +35,10 @@ import Vue, { PropType } from 'vue';
 import { Result } from '../interfaces/Result';
 
 export default Vue.extend({
-  name: 'Result',
+  name: 'ResultView',
   props: {
     uuid: String,
-    results: [] as PropType<Result[]>,
+    results: {} as PropType<Result[]>,
   },
   computed: {
     percentage(): number {

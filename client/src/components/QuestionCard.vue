@@ -1,12 +1,12 @@
 <template>
   <v-card class="mx-auto" max-width="600">
-    <v-card-title>
+    <v-card-title class="pb-0">
       <v-container class="py-0">
         <v-row>
           <v-col cols="8" class="text-left">
             問題 {{ this.message.question.id }}
           </v-col>
-          <v-col cols="4" clas="text-right">
+          <v-col cols="4" class="text-right text-subtitle-1">
             {{ this.message.question.position.current }} / {{ this.message.question.position.tail }}
           </v-col>
         </v-row>
@@ -15,9 +15,20 @@
 
     <v-card-text>
       <v-container class="py-0">
-        <v-row>
+        <v-row class="text-body-2">
           <v-spacer></v-spacer>
-          <v-col cols="12" class="text-left">
+          <v-col cols="6" class="py-2 text-left">
+            <v-chip small outlined>
+              カテゴリ: {{ this.message.question.category }}
+            </v-chip>
+          </v-col>
+          <v-col cols="6" class="py-2 text-right">
+            配点: {{ this.message.question.point }}
+          </v-col>
+        </v-row>
+        <v-row class="pt-2">
+          <v-spacer></v-spacer>
+          <v-col cols="12" class="text-left text-body-1">
             {{ this.message.question.description }}
           </v-col>
           <v-spacer></v-spacer>

@@ -14,7 +14,7 @@ POST http://localhost:8080/api/messages
   "question": {
     "id": "1",
     "description": "（サンプル）北海道弁ではない言葉はどれでしょう？",
-    "category": "カテゴリ",
+    "category": "道産子",
     "point": 100,
     "position": {
       "current": 1,
@@ -46,7 +46,7 @@ POST http://localhost:8080/api/messages
   "question": {
     "id": "1",
     "description": "（サンプル）北海道弁ではない言葉はどれでしょう？",
-    "category": "カテゴリ",
+    "category": "道産子",
     "point": 100,
     "position": {
       "current": 1,
@@ -78,7 +78,7 @@ POST http://localhost:8080/api/messages
   "question": {
     "id": "1",
     "description": "（サンプル）北海道弁ではない言葉はどれでしょう？",
-    "category": "カテゴリ",
+    "category": "道産子",
     "point": 100,
     "position": {
       "current": 1,

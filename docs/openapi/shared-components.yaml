@@ -1,49 +1,17 @@
-openapi: 3.0.0
-info:
-  title: de:code 2020 Tech Quiz - Control client
-  description: APIs to control web client that makes audience answer for de:code 2020 Tech Quiz
-  version: 1.0.0
-
-servers:
-  - url: 'http://localhost:{port}/api'
-    description: Local
-    variables:
-      port:
-        default: '8080'
-        description: port number
-  - url: 'https://{prefix}.{location}.azurestaticapps.net/api'
-    description: Static Web App
-    variables:
-      prefix:
-        default: <Input here>
-        description: Sub domain prefix
-      location:
-        default: eastasia
-        description: Location
-
-paths:
-  /messages:
-    post:
-      operationId: sendMessages
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SendMessagesRequestBody"
-      responses:
-        '200':
-          description: Succeeded
-
 components:
   schemas:
     SendMessagesRequestBody:
       oneOf:
-      - $ref: '#/components/schemas/InitMessageRequestBody'
-      - $ref: '#/components/schemas/ShowMessageRequestBody'
-      - $ref: '#/components/schemas/StartMessageRequestBody'
-      - $ref: '#/components/schemas/FinishMessageRequestBody'
-      - $ref: '#/components/schemas/ResultMessageRequestBody'
-    InitMessageRequestBody:
+      - $ref: '#/components/schemas/InitMessage'
+      - $ref: '#/components/schemas/ShowMessage'
+      - $ref: '#/components/schemas/StartMessage'
+      - $ref: '#/components/schemas/FinishMessage'
+      - $ref: '#/components/schemas/ResultMessage'
+    CurrentQuestion:
+      oneOf:
+      - $ref: '#/components/schemas/ShowMessage'
+      - $ref: '#/components/schemas/StartMessage'
+    InitMessage:
       type: object
       required: [state]
       properties:
@@ -52,7 +20,7 @@ components:
           format: init
           example: init
           default: init
-    ShowMessageRequestBody:
+    ShowMessage:
       type: object
       required: [state,question,choices]
       properties:
@@ -65,7 +33,7 @@ components:
           $ref: "#/components/schemas/Question"
         choices:
           $ref: "#/components/schemas/Choices"
-    StartMessageRequestBody:
+    StartMessage:
       type: object
       required: [state,question,choices]
       properties:
@@ -78,7 +46,7 @@ components:
           $ref: "#/components/schemas/Question"
         choices:
           $ref: "#/components/schemas/Choices"
-    FinishMessageRequestBody:
+    FinishMessage:
       type: object
       required: [state,question,choices,correct]
       properties:
@@ -93,7 +61,7 @@ components:
           $ref: "#/components/schemas/Choices"
         correct:
           $ref: "#/components/schemas/CorrectAnswer"
-    ResultMessageRequestBody:
+    ResultMessage:
       type: object
       required: [state]
       properties:
@@ -104,12 +72,28 @@ components:
           default: result
     Question:
       type: object
-      required: [id,description]
+      required: 
+      - id
+      - description
+      - category
+      - point
+      - position
       properties:
         id:
           type: string
         description:
           type: string
+        category:
+          type: string
+        point:
+          type: integer
+        position:
+          type: object
+          properties:
+            current:
+              type: integer
+            tail:
+              type: integer
     Choices:
       type: object
       required: [a, b, c, d]

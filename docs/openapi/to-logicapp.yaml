@@ -16,6 +16,7 @@ paths:
   /:
     post:
       operationId: answer
+      summary: Send an answer
       requestBody:
         content:
           application/json:
@@ -28,6 +29,16 @@ paths:
             application/text:
               schema:
                 type: string
+    get:
+      operationId: getCurrentQuestion
+      summary: Get a current question
+      responses:
+        '200':
+          description: Succeeded
+          content:
+            application/json:
+              schema:
+                $ref: './shared-components.yaml#/components/schemas/CurrentQuestion'
 
 components:
   schemas:
@@ -45,3 +56,4 @@ components:
             answer_id:
               type: string
               pattern: 'a|b|c|d'
+

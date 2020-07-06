@@ -38,13 +38,13 @@ npm run start
 
 LogicApps による回答収集APIについては、下記に定義します。
 
-- [openapi_to-logicapp.yaml](./docs/openapi_to-logicapp.yaml)
+- [to-logicapp.yaml](./docs/openapi/to-logicapp.yaml)
 
 ### 回答クライアント操作API
 
 本回答クライアントに対しての操作に関する OpenAPI 定義はこちらです。
 
-- [openapi_to-web-client.yaml](./docs/openapi_to-web-client.yaml)
+- [to-web-client.yaml](./docs/openapi/to-web-client.yaml)
 
 #### Visual Studio Code の REST Client を利用したサンプルメッセージ送信
 

@@ -118,6 +118,7 @@ export default Vue.extend({
   watch: {
     message(message: ShowMessage | StartMessage | FinishMessage) {
       this.state.setState(message.state);
+      this.sent = false;
     },
   },
 
@@ -170,6 +171,7 @@ export default Vue.extend({
   created() {
     this.state = new State();
     this.state.setState(this.message.state);
+    this.sent = false;
   },
 
   methods: {

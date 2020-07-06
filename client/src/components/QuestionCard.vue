@@ -189,6 +189,7 @@ export default Vue.extend({
             questionId: this.message.question.id,
             answerId: this.answerId,
             isCorrect: null,
+            point: this.message.question.point,
           };
           this.$emit('update-result', result);
           this.initializeAnswer();

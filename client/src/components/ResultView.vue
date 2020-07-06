@@ -19,6 +19,11 @@
               </v-row>
               <v-row>
                 <v-col>
+                  あなたが獲得した得点は {{ totalPoint }}点 です。
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
                   {{ message }}
                 </v-col>
               </v-row>
@@ -41,11 +46,21 @@ export default Vue.extend({
     results: {} as PropType<Result[]>,
   },
   computed: {
+    correctResults(): Result[] {
+      return this.results.filter((result: Result) => result.isCorrect);
+    },
+
     percentage(): number {
-      const correctResults = this.results.filter((result: Result) => result.isCorrect);
-      const rate = correctResults.length / this.results.length;
+      const rate = this.correctResults.length / this.results.length;
       return Math.round(rate * 100);
     },
+
+    totalPoint(): number {
+      return this.correctResults
+        .map((result: Result) => result.point)
+        .reduce((accumulator: number, currentValue: number) => accumulator + currentValue, 0);
+    },
+
     message(): string {
       if (this.percentage === 100) {
         return 'PERFECT!!';

@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="text-center">
       <v-col cols="12">
-        <Waiting
+        <WaitingView
           v-if="this.state.isInit()"
           v-bind:uuid="uuid"
           v-on:reset-results="resetResults"
@@ -36,7 +36,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { uuid as uuidLib } from 'vue-uuid';
-import Waiting from './Waiting.vue';
+import WaitingView from './WaitingView.vue';
 import QuestionView from './QuestionView.vue';
 import ResultView from './ResultView.vue';
 import SignalRClient from '../services/SignalRClient';
@@ -54,7 +54,7 @@ export default Vue.extend({
   name: 'Content',
 
   components: {
-    Waiting,
+    WaitingView,
     QuestionView,
     ResultView,
   },

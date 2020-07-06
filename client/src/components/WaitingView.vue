@@ -43,7 +43,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'Waiting',
+  name: 'WaitingView',
   props: {
     uuid: String,
   },

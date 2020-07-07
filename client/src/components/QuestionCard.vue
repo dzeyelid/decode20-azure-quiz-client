@@ -183,20 +183,21 @@ export default Vue.extend({
       if (this.answerId !== null) {
         const answer = Answer.createMessage(this.uuid, this.message.question.id, this.answerId);
         const url = process.env.VUE_APP_SEND_ANSWER_URL;
-        if (typeof url === 'string') {
-          await axios.post(url, answer);
-          const result: Result = {
-            questionId: this.message.question.id,
-            answerId: this.answerId,
-            isCorrect: null,
-            point: this.message.question.point,
-          };
-          this.$emit('update-result', result);
-          this.initializeAnswer();
-          this.sent = true;
-        } else {
+        if (typeof url !== 'string') {
           console.log('VUE_APP_SEND_ANSWER_URL is not set.');
+          return;
         }
+
+        await axios.post(url, answer);
+        const result: Result = {
+          questionId: this.message.question.id,
+          answerId: this.answerId,
+          isCorrect: null,
+          point: this.message.question.point,
+        };
+        this.$emit('update-result', result);
+        this.initializeAnswer();
+        this.sent = true;
       }
     },
 

@@ -4,6 +4,13 @@
 
 ### フロントエンドの起動
 
+`client` ディレクトリ配下に、 `.env.local` を作成し、下記の変数を値とともに設定してください。
+
+```env
+VUE_APP_SEND_ANSWER_URL=<Url to send an answer>
+VUE_APP_GET_QUESTION_URL=<Url to get the current url>
+```
+
 Vue の開発サーバを起動します。
 
 ```ps1

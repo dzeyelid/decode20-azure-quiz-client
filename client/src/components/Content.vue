@@ -5,6 +5,7 @@
         <WaitingView
           v-if="this.state.isInit()"
           v-bind:uuid="uuid"
+          v-on:fetch-current-question="fetchCurrentQuestion"
           v-on:reset-results="resetResults"
         />
         <QuestionView
@@ -36,6 +37,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { uuid as uuidLib } from 'vue-uuid';
+import axios from 'axios';
 import WaitingView from './WaitingView.vue';
 import QuestionView from './QuestionView.vue';
 import ResultView from './ResultView.vue';
@@ -99,10 +101,6 @@ export default Vue.extend({
       }
     },
 
-    async sendMessage() {
-      await this.signalRClient.send({ state: 'init' });
-    },
-
     updateResultWithFinishMessage(message: FinishMessage) {
       this.resultRepository.updateWithCorrectAnswer(message.question.id, message.correct.choice);
     },
@@ -113,6 +111,17 @@ export default Vue.extend({
 
     resetResults() {
       this.resultRepository.reset();
+    },
+
+    async fetchCurrentQuestion() {
+      const url = process.env.VUE_APP_GET_QUESTION_URL;
+      if (typeof url !== 'string') {
+        console.log('VUE_APP_GET_QUESTION_URL is not set.');
+        return;
+      }
+
+      const response = await axios.get(url);
+      this.receiveMessage(response.data);
     },
   },
 });

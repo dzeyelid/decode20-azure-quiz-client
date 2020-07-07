@@ -32,9 +32,14 @@
       </v-col>
     </v-row>
     <v-row class="text-center">
-      <v-col>
-        <v-btn @click="$emit('reset-results')">Rest results</v-btn>
+      <v-spacer></v-spacer>
+      <v-col cols="12" xl="3" lg="3" md="3" v-if="enableGetQuestion">
+        <v-btn @click="$emit('fetch-current-question')">現在の問題に途中参加する</v-btn>
       </v-col>
+      <v-col cols="12" xl="3" lg="3" md="3">
+        <v-btn @click="$emit('reset-results')">Reset results</v-btn>
+      </v-col>
+      <v-spacer></v-spacer>
     </v-row>
   </v-container>
 </template>
@@ -46,6 +51,12 @@ export default Vue.extend({
   name: 'WaitingView',
   props: {
     uuid: String,
+  },
+
+  computed: {
+    enableGetQuestion() {
+      return (typeof process.env.VUE_APP_GET_QUESTION_URL === 'string');
+    },
   },
 });
 </script>

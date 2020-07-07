@@ -5,6 +5,8 @@
         <WaitingView
           v-if="this.state.isInit()"
           v-bind:uuid="uuid"
+          v-bind:nickname="nickname"
+          v-on:set-nickname="setNickname"
           v-on:fetch-current-question="fetchCurrentQuestion"
           v-on:reset-results="resetResults"
         />
@@ -16,6 +18,8 @@
         <QuestionView
           v-if="this.state.isStart()"
           v-bind:uuid="uuid"
+          v-bind:nickname="nickname"
+          v-bind:isFirst="resultRepository.isFirstResult()"
           v-bind:message="message"
           v-on:update-result="this.updateResult"
         />
@@ -64,6 +68,7 @@ export default Vue.extend({
   data: () => ({
     state: {} as State,
     uuid: null as string | null,
+    nickname: null as string | null,
     signalRClient: {} as SignalRClient,
     message: {} as
       Message | InitMessage | ShowMessage | StartMessage | FinishMessage | ResultMessage,
@@ -72,6 +77,7 @@ export default Vue.extend({
 
   async created() {
     this.uuid = this.getUuid();
+    this.nickname = this.getNickname();
     this.state = new State();
     this.signalRClient = await this.getClient();
   },
@@ -83,6 +89,13 @@ export default Vue.extend({
         localStorage.uuid = uuid;
       }
       return localStorage.uuid;
+    },
+
+    getNickname(): string {
+      if (!localStorage.nickname) {
+        localStorage.nickname = '';
+      }
+      return localStorage.nickname;
     },
 
     async getClient(): Promise<SignalRClient> {
@@ -98,6 +111,11 @@ export default Vue.extend({
 
       if (this.state.isFinish()) {
         this.updateResultWithFinishMessage(this.message as FinishMessage);
+        return;
+      }
+
+      if (this.state.isInit()) {
+        this.resetResults();
       }
     },
 
@@ -122,6 +140,11 @@ export default Vue.extend({
 
       const response = await axios.get(url);
       this.receiveMessage(response.data);
+    },
+
+    setNickname(nickname: string) {
+      this.nickname = nickname;
+      localStorage.nickname = this.nickname;
     },
   },
 });

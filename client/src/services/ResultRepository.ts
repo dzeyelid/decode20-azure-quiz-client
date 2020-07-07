@@ -1,4 +1,5 @@
 import { Result } from '@/interfaces/Result';
+import moment from 'moment';
 
 export default class ResultRepository {
   private results: Result[] = [];
@@ -10,7 +11,10 @@ export default class ResultRepository {
   private load(): void {
     if (!localStorage.results) {
       localStorage.results = JSON.stringify([]);
+    } else {
+      this.resetPastResults();
     }
+
     this.results = JSON.parse(localStorage.results);
   }
 
@@ -43,7 +47,25 @@ export default class ResultRepository {
     this.updateLocalStorage();
   }
 
+  public isFirstResult() {
+    return this.results.length === 0;
+  }
+
+  private resetPastResults() {
+    if (localStorage.lastUpdated) {
+      const lastUpdated = moment.unix(localStorage.lastUpdated);
+      lastUpdated.hour(0);
+      lastUpdated.minute(0);
+      lastUpdated.second(0);
+      if (moment().diff(lastUpdated, 'days') < 1) {
+        return;
+      }
+    }
+    this.reset();
+  }
+
   private updateLocalStorage() {
+    localStorage.lastUpdated = moment().unix();
     localStorage.results = JSON.stringify(this.results);
   }
 

@@ -6,6 +6,8 @@
       <v-col cols="12" lg="6" md="6" sm="12" xs="12">
         <QuestionCard
           v-bind:uuid="uuid"
+          v-bind:nickname="nickname"
+          v-bind:isFirst="isFirst"
           v-bind:message="message"
           v-on:update-result="this.updateResult"
         />
@@ -30,6 +32,8 @@ export default Vue.extend({
 
   props: {
     uuid: String,
+    nickname: String,
+    isFirst: Boolean,
     message: {} as PropType<ShowMessage> | PropType<StartMessage>,
   },
 

@@ -13,25 +13,22 @@
       </v-container>
     </v-card-title>
 
-    <v-card-text>
+    <v-card-text class="pb-0">
       <v-container class="py-0">
-        <v-row class="text-body-2">
-          <v-spacer></v-spacer>
-          <v-col cols="6" class="py-2 text-left">
+        <v-row justify="center" class="text-body-2">
+          <v-col cols="8" class="py-2 text-left">
             <v-chip small outlined>
               カテゴリ: {{ this.message.question.category }}
             </v-chip>
           </v-col>
-          <v-col cols="6" class="py-2 text-right">
+          <v-col cols="4" class="py-2 text-right">
             配点: {{ this.message.question.point }}
           </v-col>
         </v-row>
-        <v-row class="pt-2">
-          <v-spacer></v-spacer>
+        <v-row justify="center" class="pt-2">
           <v-col cols="12" class="text-left text-body-1">
             {{ this.message.question.description }}
           </v-col>
-          <v-spacer></v-spacer>
         </v-row>
         <v-row>
           <v-radio-group
@@ -64,15 +61,24 @@
       </v-row>
     </v-container>
 
-    <v-card-actions v-if="this.state.isStart()">
-      <v-container class="py-0">
-        <v-row>
-          <v-col class="mx-4">
+    <v-card-actions v-if="this.state.isStart()" class="pt-0">
+      <v-container class="pt-0">
+        <v-row justify="center">
+          <v-col cols="4" class="pb-1">
             <v-btn color="primary" @click="sendAnswer"
               v-bind:disabled="this.buttonIsDisabled ? 'disabled' : false">
               送信
               <v-icon small class="ml-2">fas fa-paper-plane</v-icon>
             </v-btn>
+          </v-col>
+        </v-row>
+        <v-row justify="center" style="height: 26px;">
+          <v-col
+            cols="4"
+            class="grey--text text--darken-2 text-center text-caption pt-1"
+            v-if="sent"
+          >
+            送信しました
           </v-col>
         </v-row>
       </v-container>
@@ -106,6 +112,8 @@ export default Vue.extend({
 
   props: {
     uuid: String,
+    nickname: String,
+    isFirst: Boolean,
     message: {} as PropType<ShowMessage> | PropType<StartMessage> | PropType<FinishMessage>,
   },
 
@@ -181,7 +189,14 @@ export default Vue.extend({
 
     async sendAnswer() {
       if (this.answerId !== null) {
-        const answer = Answer.createMessage(this.uuid, this.message.question.id, this.answerId);
+        const answer = Answer.createMessage(
+          this.uuid,
+          this.nickname,
+          this.message.question.id,
+          this.answerId,
+          this.isFirst,
+        );
+
         const url = process.env.VUE_APP_SEND_ANSWER_URL;
         if (typeof url !== 'string') {
           console.log('VUE_APP_SEND_ANSWER_URL is not set.');

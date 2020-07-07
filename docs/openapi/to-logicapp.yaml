@@ -44,16 +44,25 @@ components:
   schemas:
     AnswerRequestBody:
       type: object
+      required:
+      - identifier
+      - nickname
+      - question_id
+      - answer_id
+      - isFirst
       properties:
-        properties:
-          type: object
-          properties:
-            identifier:
-              type: string
-              format: uuid
-            question_id:
-              type: string
-            answer_id:
-              type: string
-              pattern: 'a|b|c|d'
+        identifier:
+          type: string
+          format: uuid
+        nickname:
+          type: string
+        question_id:
+          type: string
+        answer_id:
+          type: string
+          pattern: 'a|b|c|d'
+        isFirst:
+          type: boolean
+          example: false
+
 

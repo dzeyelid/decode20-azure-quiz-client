@@ -13,7 +13,13 @@ POST http://localhost:8080/api/messages
   "state": "show",
   "question": {
     "id": "1",
-    "description": "（サンプル）北海道弁ではない言葉はどれでしょう？"
+    "description": "（サンプル）北海道弁ではない言葉はどれでしょう？",
+    "category": "道産子",
+    "point": 100,
+    "position": {
+      "current": 1,
+      "tail": 8
+    }
   },
   "choices": {
     "a": {
@@ -39,7 +45,13 @@ POST http://localhost:8080/api/messages
   "state": "start",
   "question": {
     "id": "1",
-    "description": "（サンプル）北海道弁ではない言葉はどれでしょう？"
+    "description": "（サンプル）北海道弁ではない言葉はどれでしょう？",
+    "category": "道産子",
+    "point": 100,
+    "position": {
+      "current": 1,
+      "tail": 8
+    }
   },
   "choices": {
     "a": {
@@ -65,7 +77,13 @@ POST http://localhost:8080/api/messages
   "state": "finish",
   "question": {
     "id": "1",
-    "description": "（サンプル）北海道弁ではない言葉はどれでしょう？"
+    "description": "（サンプル）北海道弁ではない言葉はどれでしょう？",
+    "category": "道産子",
+    "point": 100,
+    "position": {
+      "current": 1,
+      "tail": 8
+    }
   },
   "choices": {
     "a": {

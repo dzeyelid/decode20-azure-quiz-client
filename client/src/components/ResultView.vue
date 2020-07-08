@@ -19,6 +19,11 @@
               </v-row>
               <v-row>
                 <v-col>
+                  あなたが獲得した得点は {{ totalPoint }}点 です。
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
                   {{ message }}
                 </v-col>
               </v-row>
@@ -32,21 +37,30 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-import Result from '../classes/Result';
+import { Result } from '../interfaces/Result';
 
 export default Vue.extend({
-  name: 'Result',
+  name: 'ResultView',
   props: {
     uuid: String,
-    results: [] as PropType<Result[]>,
+    results: {} as PropType<Result[]>,
   },
   computed: {
+    correctResults(): Result[] {
+      return this.results.filter((result: Result) => result.isCorrect);
+    },
+
     percentage(): number {
-      const resultObjects = this.results;
-      const correctResults = resultObjects.filter((result) => (result as Result).isCorrect);
-      const rate = correctResults.length / resultObjects.length;
+      const rate = this.correctResults.length / this.results.length;
       return Math.round(rate * 100);
     },
+
+    totalPoint(): number {
+      return this.correctResults
+        .map((result: Result) => result.point)
+        .reduce((accumulator: number, currentValue: number) => accumulator + currentValue, 0);
+    },
+
     message(): string {
       if (this.percentage === 100) {
         return 'PERFECT!!';

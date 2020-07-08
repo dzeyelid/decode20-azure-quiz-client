@@ -29,3 +29,12 @@ az deployment group create `
 ```
 
 If you would like to set another parameter, see `arm-template.json` and `arm-template.parameters.json` for example SignalR service's sku (Default here, the sku is set as Standard plan.).
+
+If you would like to set Application settings, run the command below after API's deployment is deployed by GitHub Actions's workflow.
+
+```ps1
+az staticwebapp appsettings set `
+  --resource-group $RESOURCE_GROUP `
+  --name "static-$IDENTIFIER" `
+  --setting-names AzureSignalRConnectionString=<SignalR service connection string>
+```

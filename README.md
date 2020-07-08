@@ -4,6 +4,13 @@
 
 ### フロントエンドの起動
 
+`client` ディレクトリ配下に、 `.env.local` を作成し、下記の変数を値とともに設定してください。
+
+```env
+VUE_APP_SEND_ANSWER_URL=<Url to send an answer>
+VUE_APP_GET_QUESTION_URL=<Url to get the current url>
+```
+
 Vue の開発サーバを起動します。
 
 ```ps1
@@ -38,13 +45,13 @@ npm run start
 
 LogicApps による回答収集APIについては、下記に定義します。
 
-- [openapi_to-logicapp.yaml](./docs/openapi_to-logicapp.yaml)
+- [to-logicapp.yaml](./docs/openapi/to-logicapp.yaml)
 
 ### 回答クライアント操作API
 
 本回答クライアントに対しての操作に関する OpenAPI 定義はこちらです。
 
-- [openapi_to-web-client.yaml](./docs/openapi_to-web-client.yaml)
+- [to-web-client.yaml](./docs/openapi/to-web-client.yaml)
 
 #### Visual Studio Code の REST Client を利用したサンプルメッセージ送信
 
@@ -63,7 +70,13 @@ LogicApps による回答収集APIについては、下記に定義します。
   "state": "show",
   "question": {
     "id": "1",
-    "description": "質問の内容"
+    "description": "質問の内容",
+    "category": "カテゴリ",
+    "point": 100,
+    "position": {
+      "current": 1,  # 現在の問題位置
+      "tail": 8      # 最後尾の問題位置
+    }
   },
   "choices": {
     "a": {
@@ -91,7 +104,13 @@ LogicApps による回答収集APIについては、下記に定義します。
   "state": "start",
   "question": {
     "id": "1",
-    "description": "質問の内容"
+    "description": "質問の内容",
+    "category": "カテゴリ",
+    "point": 100,
+    "position": {
+      "current": 1,  # 現在の問題位置
+      "tail": 8      # 最後尾の問題位置
+    }
   },
   "choices": {
     "a": {
@@ -119,7 +138,13 @@ LogicApps による回答収集APIについては、下記に定義します。
   "state": "finish",
   "question": {
     "id": "1",
-    "description": "質問の内容"
+    "description": "質問の内容",
+    "category": "カテゴリ",
+    "point": 100,
+    "position": {
+      "current": 1,  # 現在の問題位置
+      "tail": 8      # 最後尾の問題位置
+    }
   },
   "choices": {
     "a": {

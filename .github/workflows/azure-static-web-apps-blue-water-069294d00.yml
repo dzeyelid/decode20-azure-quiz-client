@@ -33,6 +33,7 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env:
           VUE_APP_SEND_ANSWER_URL: ${{ secrets.SEND_ANSWER_URL }}
+          VUE_APP_GET_QUESTION_URL: ${{ secrets.GET_QUESTION_URL }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

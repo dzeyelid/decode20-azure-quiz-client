@@ -1,0 +1,36 @@
+openapi: 3.0.0
+info:
+  title: de:code 2020 Tech Quiz - Control client
+  description: APIs to control web client that makes audience answer for de:code 2020 Tech Quiz
+  version: 1.0.0
+
+servers:
+  - url: 'http://localhost:{port}/api'
+    description: Local
+    variables:
+      port:
+        default: '8080'
+        description: port number
+  - url: 'https://{prefix}.{location}.azurestaticapps.net/api'
+    description: Static Web App
+    variables:
+      prefix:
+        default: <Input here>
+        description: Sub domain prefix
+      location:
+        default: eastasia
+        description: Location
+
+paths:
+  /messages:
+    post:
+      operationId: sendMessage
+      summary: Send a message to web client
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./shared-components.yaml#/components/schemas/SendMessagesRequestBody"
+      responses:
+        '200':
+          description: Succeeded
